@@ -14,3 +14,5 @@ final textMedium = TextStyle(
   letterSpacing: 1,
   fontSize: 16,
 );
+
+final bgColor = Color.fromRGBO(71, 76, 80, 100);
