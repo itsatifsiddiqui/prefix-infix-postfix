@@ -156,30 +156,6 @@ class _ConverterUIState extends State<ConverterUI> {
                     ),
                   ),
                 )
-                // FlatButton(
-                //   splashColor: Colors.black,
-                //   shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(1000)),
-                //   // color: Color.fromRGBO(218, 242, 180, 1.0),
-                //   color: Colors.greenAccent[200],
-                //   onPressed: () {
-                //     _controller.text += "%";
-                //   },
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(
-                //         horizontal: 0.0, vertical: 8.0),
-                //     child: Text(
-                //       "%",
-                //       textAlign: TextAlign.center,
-                //       style: TextStyle(
-                //           // color: Color.fromRGBO(96, 100, 94, 1.0),
-                //           color: Colors.black87,
-                //           fontSize: 30,
-                //           letterSpacing: 80,
-                //           fontWeight: FontWeight.w400),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             Row(
@@ -204,9 +180,49 @@ class _ConverterUIState extends State<ConverterUI> {
                 ),
               ],
             ),
-            Container(
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    Infix.toPostfixExpression(
+                            _controller.text.split('').reversed.join())
+                        .split('')
+                        .reversed
+                        .join(),
+                    maxLines: 1,
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    Infix.toPostfixExpression(_controller.text),
+                    maxLines: 1,
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    toValue(),
+                    style: TextStyle(fontSize: 25, color: Colors.green),
+                    maxLines: 1,
+                  ),
+                  SizedBox(height: 15),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8, top: 0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  height: 4,
+                  width: mq.width / 4,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            AnimatedContainer(
+              duration: Duration(microseconds: 100),
               alignment: Alignment.centerRight,
-              height: 50,
               child: TextField(
                 enabled: _keyboardFlag,
                 controller: _controller,
@@ -216,26 +232,10 @@ class _ConverterUIState extends State<ConverterUI> {
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.zero, border: InputBorder.none),
                 style: TextStyle(
-                  fontSize: (_controller.text.length > 10) ? 30 : 40,
+                  fontSize: fontsize(),
                   color: Colors.white,
                 ),
               ),
-            ),
-            Text(
-              Infix.toPostfixExpression(
-                      _controller.text.split('').reversed.join())
-                  .split('')
-                  .reversed
-                  .join(),
-              style: TextStyle(fontSize: 30, color: Colors.white),
-            ),
-            Text(
-              toValue(),
-              style: TextStyle(fontSize: 30, color: Colors.white),
-            ),
-            Text(
-              Infix.toPostfixExpression(_controller.text),
-              style: TextStyle(fontSize: 30, color: Colors.white),
             ),
           ],
         ),
@@ -291,5 +291,21 @@ class _ConverterUIState extends State<ConverterUI> {
                   controller: _controller,
                 ))
             .toList());
+  }
+
+  double fontsize() {
+    int size = _controller.text.length;
+    if (size < 6)
+      return 60;
+    else if (size < 9)
+      return 55;
+    else if (size < 12)
+      return 50;
+    else if (size < 15)
+      return 45;
+    else if (size < 18)
+      return 40;
+    else
+      return 35;
   }
 }
