@@ -139,30 +139,47 @@ class _ConverterUIState extends State<ConverterUI> {
                   ),
                 ),
                 sizebox,
-                FlatButton(
-                  splashColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(1000)),
-                  // color: Color.fromRGBO(218, 242, 180, 1.0),
-                  color: Colors.greenAccent[200],
-                  onPressed: () {
-                    _controller.text += "%";
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 0.0, vertical: 8.0),
-                    child: Text(
-                      "%",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          // color: Color.fromRGBO(96, 100, 94, 1.0),
-                          color: Colors.black87,
-                          fontSize: 30,
-                          letterSpacing: 80,
-                          fontWeight: FontWeight.w400),
+                Container(
+                  width: w3,
+                  child: FittedBox(
+                    child: Row(
+                      children: <Widget>[
+                        new CircularButton(
+                          letter: "^",
+                          controller: _controller,
+                        ),
+                        new CircularButton(
+                          letter: "%",
+                          controller: _controller,
+                        )
+                      ],
                     ),
                   ),
-                ),
+                )
+                // FlatButton(
+                //   splashColor: Colors.black,
+                //   shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(1000)),
+                //   // color: Color.fromRGBO(218, 242, 180, 1.0),
+                //   color: Colors.greenAccent[200],
+                //   onPressed: () {
+                //     _controller.text += "%";
+                //   },
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(
+                //         horizontal: 0.0, vertical: 8.0),
+                //     child: Text(
+                //       "%",
+                //       textAlign: TextAlign.center,
+                //       style: TextStyle(
+                //           // color: Color.fromRGBO(96, 100, 94, 1.0),
+                //           color: Colors.black87,
+                //           fontSize: 30,
+                //           letterSpacing: 80,
+                //           fontWeight: FontWeight.w400),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             Row(
@@ -204,7 +221,18 @@ class _ConverterUIState extends State<ConverterUI> {
                 ),
               ),
             ),
-
+            Text(
+              Infix.toPostfixExpression(
+                      _controller.text.split('').reversed.join())
+                  .split('')
+                  .reversed
+                  .join(),
+              style: TextStyle(fontSize: 30, color: Colors.white),
+            ),
+            Text(
+              toValue(),
+              style: TextStyle(fontSize: 30, color: Colors.white),
+            ),
             Text(
               Infix.toPostfixExpression(_controller.text),
               style: TextStyle(fontSize: 30, color: Colors.white),
@@ -213,6 +241,14 @@ class _ConverterUIState extends State<ConverterUI> {
         ),
       ),
     );
+  }
+
+  String toValue() {
+    try {
+      return Infix.toValue(_controller.text).toString();
+    } catch (e) {
+      return "";
+    }
   }
 
   FlatButton keyBoardButton() {
