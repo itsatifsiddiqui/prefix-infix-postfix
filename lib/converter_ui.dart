@@ -51,45 +51,6 @@ class _ConverterUIState extends State<ConverterUI> {
           reverse: true,
           // mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            // Row(
-            //   children: [
-            //     Container(
-            //       padding: EdgeInsets.only(left: 12),
-            //       width: w1_8,
-            //       child: Row(
-            //         children: <Widget>[
-            //           keyBoardButton(),
-            //           SizedBox(width: mq.width / 130),
-            //           TransparentButton(
-            //             letter: "0",
-            //             controller: _controller,
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     sizebox,
-            //     Container(
-            //       width: w3,
-            //       child: Container(
-            //         width: mq.width / 3,
-            //         child: FittedBox(
-            //           child: Row(
-            //             children: <Widget>[
-            //               new CircularButton(
-            //                 letter: "+",
-            //                 controller: _controller,
-            //               ),
-            //               new CircularButton(
-            //                 letter: "-",
-            //                 controller: _controller,
-            //               )
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     )
-            //   ],
-            // ),
             Row(
               children: [
                 Container(
@@ -202,23 +163,6 @@ class _ConverterUIState extends State<ConverterUI> {
                     ),
                   ),
                 ),
-                // Container(
-                //   width: w3,
-                //   child: FittedBox(
-                //     child: Row(
-                //       children: <Widget>[
-                //         new CircularButton(
-                //           letter: "%",
-                //           controller: _controller,
-                //         ),
-                //         new CircularButton(
-                //           letter: "*",
-                //           controller: _controller,
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // )
               ],
             ),
             Row(
