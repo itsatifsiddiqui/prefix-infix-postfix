@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:infix_postfix_prefix/converter_ui.dart';
 import 'package:infix_postfix_prefix/ui_styles/styles.dart';
 
 class Home extends StatelessWidget {
@@ -43,117 +44,72 @@ class Home extends StatelessWidget {
 
   Align postfixCard(BuildContext context) {
     return Align(
-          alignment: Alignment(0, 1),
-          child: Padding(
-            padding: EdgeInsets.all(12),
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              child: Container(
-                  height: MediaQuery.of(context).size.height / 5,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.redAccent[100],
-                        Colors.deepOrangeAccent[100]
-                      ],
-                    ),
+      alignment: Alignment(0, 1),
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          child: Container(
+              height: MediaQuery.of(context).size.height / 5,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.redAccent[100], Colors.deepOrangeAccent[100]],
+                ),
+              ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 25),
+                  Text(
+                    "POSTFIX -> Prefix/Infix",
+                    textAlign: TextAlign.center,
+                    style: textHeader,
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 25),
-                      Text(
-                        "POSTFIX -> Prefix/Infix",
-                        textAlign: TextAlign.center,
-                        style: textHeader,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        "AB+ -> +AB ",
-                        textAlign: TextAlign.center,
-                        style: textMedium,
-                      ),
-                      Text(
-                        "AB+ -> A+B ",
-                        textAlign: TextAlign.center,
-                        style: textMedium,
-                      ),
-                    ],
-                  )),
-            ),
-          ),
-        );
+                  SizedBox(height: 10),
+                  Text(
+                    "AB+ -> +AB ",
+                    textAlign: TextAlign.center,
+                    style: textMedium,
+                  ),
+                  Text(
+                    "AB+ -> A+B ",
+                    textAlign: TextAlign.center,
+                    style: textMedium,
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
   }
 
   Align infixCard(BuildContext context) {
     return Align(
-          alignment: Alignment(0, 0.40),
-          child: Padding(
-            padding: EdgeInsets.all(12),
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              child: Container(
-                  height: MediaQuery.of(context).size.height / 5,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.purpleAccent[100],
-                        Colors.deepPurpleAccent[100]
-                      ],
-                    ),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 25),
-                      Text(
-                        "INFIX -> Prefix/Postfix",
-                        textAlign: TextAlign.center,
-                        style: textHeader,
-                      ),
-                      SizedBox(height: 10),
-                      Text("A+B -> AB+ ",
-                          textAlign: TextAlign.center, style: textMedium),
-                      Text(
-                        "A+B -> +AB ",
-                        textAlign: TextAlign.center,
-                        style: textMedium,
-                      ),
-                    ],
-                  )),
-            ),
-          ),
-        );
-  }
-
-  Align prefixCard(BuildContext context) {
-    return Align(
-          alignment: Alignment(0, -0.20),
-          child: Padding(
-            padding: EdgeInsets.all(12),
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              child: Container(
+      alignment: Alignment(0, 0.40),
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: InkWell(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (_) => ConverterUI())),
+          child: Card(
+            elevation: 4,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            child: Container(
                 height: MediaQuery.of(context).size.height / 5,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  gradient: lGradient(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                     colors: [
-                      Colors.blueAccent[100],
-                      Colors.lightBlueAccent[100]
+                      Colors.purpleAccent[100],
+                      Colors.deepPurpleAccent[100]
                     ],
                   ),
                 ),
@@ -161,39 +117,80 @@ class Home extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: 25),
                     Text(
-                      "PREFIX -> Infix/Postfix",
+                      "INFIX -> Prefix/Postfix",
                       textAlign: TextAlign.center,
                       style: textHeader,
                     ),
                     SizedBox(height: 10),
+                    Text("A+B -> AB+ ",
+                        textAlign: TextAlign.center, style: textMedium),
                     Text(
-                      "+AB -> A+B ",
-                      textAlign: TextAlign.center,
-                      style: textMedium,
-                    ),
-                    Text(
-                      "+AB -> AB+ ",
+                      "A+B -> +AB ",
                       textAlign: TextAlign.center,
                       style: textMedium,
                     ),
                   ],
-                ),
+                )),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Align prefixCard(BuildContext context) {
+    return Align(
+      alignment: Alignment(0, -0.20),
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          child: Container(
+            height: MediaQuery.of(context).size.height / 5,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              gradient: lGradient(
+                colors: [Colors.blueAccent[100], Colors.lightBlueAccent[100]],
               ),
             ),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 25),
+                Text(
+                  "PREFIX -> Infix/Postfix",
+                  textAlign: TextAlign.center,
+                  style: textHeader,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "+AB -> A+B ",
+                  textAlign: TextAlign.center,
+                  style: textMedium,
+                ),
+                Text(
+                  "+AB -> AB+ ",
+                  textAlign: TextAlign.center,
+                  style: textMedium,
+                ),
+              ],
+            ),
           ),
-        );
+        ),
+      ),
+    );
   }
 
   ClipPath clip(BuildContext context) {
     return ClipPath(
-          clipper: MyClipper(),
-          child: Container(
-            decoration: BoxDecoration(
-                gradient: lGradient(
-                    colors: [Colors.green[300], Colors.greenAccent[700]])),
-            height: MediaQuery.of(context).size.height / 2.2,
-          ),
-        );
+      clipper: MyClipper(),
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: lGradient(
+                colors: [Colors.green[300], Colors.greenAccent[700]])),
+        height: MediaQuery.of(context).size.height / 2.2,
+      ),
+    );
   }
 }
 

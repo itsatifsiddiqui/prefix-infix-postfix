@@ -49,114 +49,118 @@ class _ConverterUIState extends State<ConverterUI> {
         padding: EdgeInsets.only(left: 12, bottom: 10, right: 16),
         child: ListView(
           reverse: true,
-          // mainAxisAlignment: MainAxisAlignment.end,
+          primary: false,
           children: <Widget>[
-            Row(
-              children: [
-                Container(
-                  width: w1_8,
-                  child: FittedBox(
+            FittedBox(
+              child: Row(
+                children: [
+                  Container(
+                    width: w1_8,
+                    child: FittedBox(
+                        child: Row(
+                      children: <Widget>[
+                        sizebox,
+                        buttonRow(["0", "."]),
+                        DeleteButton(
+                          controller: _controller,
+                        )
+                      ],
+                    )),
+                  ),
+                  sizebox,
+                  keyBoardButton()
+                ],
+              ),
+            ),
+            FittedBox(
+              child: Row(
+                children: [
+                  Container(
+                    width: w1_8,
+                    child: FittedBox(
+                      child: buttonRow(["1", "2", "3"]),
+                    ),
+                  ),
+                  sizebox,
+                  Container(
+                    width: w3,
+                    child: FittedBox(
                       child: Row(
-                    children: <Widget>[
-                      sizebox,
-                      buttonRow(["0", "."]),
-                      DeleteButton(
-                        controller: _controller,
-                      )
-                      // TransparentButton(
-                      //   letter: "del",
-                      //   controller: _controller,
-                      // )
-                    ],
-                  )),
-                ),
-                sizebox,
-                keyBoardButton()
-              ],
+                        children: <Widget>[
+                          new CircularButton(
+                            letter: "+",
+                            controller: _controller,
+                          ),
+                          new CircularButton(
+                            letter: "-",
+                            controller: _controller,
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-            Row(
-              children: [
-                Container(
-                  width: w1_8,
-                  child: FittedBox(
-                    child: buttonRow(["1", "2", "3"]),
-                  ),
-                ),
-                sizebox,
-                Container(
-                  width: w3,
-                  child: FittedBox(
-                    child: Row(
-                      children: <Widget>[
-                        new CircularButton(
-                          letter: "+",
-                          controller: _controller,
-                        ),
-                        new CircularButton(
-                          letter: "-",
-                          controller: _controller,
-                        )
-                      ],
+            FittedBox(
+              child: Row(
+                children: [
+                  Container(
+                    width: w1_8,
+                    child: FittedBox(
+                      child: buttonRow(["4", "5", "6"]),
                     ),
                   ),
-                )
-              ],
+                  sizebox,
+                  Container(
+                    width: w3,
+                    child: FittedBox(
+                      child: Row(
+                        children: <Widget>[
+                          new CircularButton(
+                            letter: "*",
+                            controller: _controller,
+                          ),
+                          new CircularButton(
+                            letter: "/",
+                            controller: _controller,
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-            Row(
-              children: [
-                Container(
-                  width: w1_8,
-                  child: FittedBox(
-                    child: buttonRow(["4", "5", "6"]),
-                  ),
-                ),
-                sizebox,
-                Container(
-                  width: w3,
-                  child: FittedBox(
-                    child: Row(
-                      children: <Widget>[
-                        new CircularButton(
-                          letter: "*",
-                          controller: _controller,
-                        ),
-                        new CircularButton(
-                          letter: "/",
-                          controller: _controller,
-                        )
-                      ],
+            FittedBox(
+              child: Row(
+                children: [
+                  Container(
+                    width: w1_8,
+                    child: FittedBox(
+                      child: buttonRow(["7", "8", "9"]),
                     ),
                   ),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                  width: w1_8,
-                  child: FittedBox(
-                    child: buttonRow(["7", "8", "9"]),
-                  ),
-                ),
-                sizebox,
-                Container(
-                  width: w3,
-                  child: FittedBox(
-                    child: Row(
-                      children: <Widget>[
-                        new CircularButton(
-                          letter: "^",
-                          controller: _controller,
-                        ),
-                        new CircularButton(
-                          letter: "%",
-                          controller: _controller,
-                        )
-                      ],
+                  sizebox,
+                  Container(
+                    width: w3,
+                    child: FittedBox(
+                      child: Row(
+                        children: <Widget>[
+                          new CircularButton(
+                            letter: "^",
+                            controller: _controller,
+                          ),
+                          new CircularButton(
+                            letter: "%",
+                            controller: _controller,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
             Row(
               children: <Widget>[
@@ -184,42 +188,105 @@ class _ConverterUIState extends State<ConverterUI> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  Text(
-                    Infix.toPostfixExpression(
-                            _controller.text.split('').reversed.join())
-                        .split('')
-                        .reversed
-                        .join(),
-                    maxLines: 1,
-                    style: TextStyle(
-                        fontSize: 22,
-                        height: 0.9,
-                        color: Colors.white,
-                        fontFamily: "titillium"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          "PREFIX",
+                          style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 15,
+                              fontFamily: "titillium"),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          reverse: true,
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            Infix.toPostfixExpression(
+                                    _controller.text.split('').reversed.join())
+                                .split('')
+                                .reversed
+                                .join(),
+                            // textAlign: TextAlign.end,
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 22,
+                                height: 0.9,
+                                color: Colors.white,
+                                fontFamily: "titillium"),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 5),
-                  Text(
-                    Infix.toPostfixExpression(_controller.text),
-                    maxLines: 1,
-                    textDirection: TextDirection.ltr,
-                    // textAlign: TextAlign.right,
-                    style: TextStyle(
-                        fontSize: 22,
-                        height: 0.9,
-                        color: Colors.white,
-                        fontFamily: "titillium"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          "POSTFIX",
+                          style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 15,
+                              fontFamily: "titillium"),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          reverse: true,
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            Infix.toPostfixExpression(_controller.text),
+                            maxLines: 1,
+                            textDirection: TextDirection.ltr,
+                            // textAlign: TextAlign.right,
+                            style: TextStyle(
+                                fontSize: 22,
+                                height: 0.9,
+                                color: Colors.white,
+                                fontFamily: "titillium"),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 5),
-                  Text(
-                    toValue(),
-                    style: TextStyle(
-                        fontSize: 22,
-                        height: 0.9,
-                        color: Colors.green,
-                        fontFamily: "titillium"),
-                    maxLines: 1,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          "VALUE",
+                          style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 15,
+                              fontFamily: "titillium"),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          reverse: true,
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            toValue(),
+                            style: TextStyle(
+                                fontSize: 22,
+                                height: 0.9,
+                                color: Colors.green,
+                                fontFamily: "titillium"),
+                            maxLines: 1,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 15),
                 ],
@@ -237,7 +304,8 @@ class _ConverterUIState extends State<ConverterUI> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
               child: TextField(
                 enabled: _keyboardFlag,
                 controller: _controller,
@@ -264,6 +332,24 @@ class _ConverterUIState extends State<ConverterUI> {
                 ),
                 textAlign: TextAlign.end,
               ),
+            ),
+            Container(
+              height: mq.height / 7,
+              alignment: Alignment.bottomCenter,
+              padding: EdgeInsets.all(25),
+              child: Text(
+                "INFIX CONVERTER",
+                style: TextStyle(
+                  fontFamily: "titillium",
+                  color: Colors.white,
+                  fontSize: 25,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.w500,
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.double,
+                  decorationColor: Colors.orangeAccent,
+                ),
+              ),
             )
           ],
         ),
@@ -278,7 +364,8 @@ class _ConverterUIState extends State<ConverterUI> {
       if (value.substring(value.length - 2, value.length) == ".0")
         return value.substring(0, value.length - 2);
       else {
-        return value;
+        print(double.parse(value));
+        return double.parse(value).toStringAsFixed(2);
       }
     } catch (e) {
       return "INVALID EXPRESSION";
