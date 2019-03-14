@@ -46,7 +46,7 @@ class _ConverterUIState extends State<ConverterUI> {
       resizeToAvoidBottomPadding: false,
       backgroundColor: bgColor,
       body: Padding(
-        padding: EdgeInsets.only(left: 12, bottom: 30, right: 16),
+        padding: EdgeInsets.only(left: 12, bottom: 10, right: 16),
         child: ListView(
           reverse: true,
           // mainAxisAlignment: MainAxisAlignment.end,
@@ -180,9 +180,11 @@ class _ConverterUIState extends State<ConverterUI> {
                 ),
               ],
             ),
-            Align(
-              alignment: Alignment.centerLeft,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
                     Infix.toPostfixExpression(
@@ -191,18 +193,32 @@ class _ConverterUIState extends State<ConverterUI> {
                         .reversed
                         .join(),
                     maxLines: 1,
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 22,
+                        height: 0.9,
+                        color: Colors.white,
+                        fontFamily: "titillium"),
                   ),
                   SizedBox(height: 5),
                   Text(
                     Infix.toPostfixExpression(_controller.text),
                     maxLines: 1,
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                    textDirection: TextDirection.ltr,
+                    // textAlign: TextAlign.right,
+                    style: TextStyle(
+                        fontSize: 22,
+                        height: 0.9,
+                        color: Colors.white,
+                        fontFamily: "titillium"),
                   ),
                   SizedBox(height: 5),
                   Text(
                     toValue(),
-                    style: TextStyle(fontSize: 25, color: Colors.green),
+                    style: TextStyle(
+                        fontSize: 22,
+                        height: 0.9,
+                        color: Colors.green,
+                        fontFamily: "titillium"),
                     maxLines: 1,
                   ),
                   SizedBox(height: 15),
@@ -210,7 +226,7 @@ class _ConverterUIState extends State<ConverterUI> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8, top: 0),
+              padding: const EdgeInsets.only(bottom: 20, top: 0, right: 17),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Container(
@@ -220,9 +236,8 @@ class _ConverterUIState extends State<ConverterUI> {
                 ),
               ),
             ),
-            AnimatedContainer(
-              duration: Duration(microseconds: 100),
-              alignment: Alignment.centerRight,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: TextField(
                 enabled: _keyboardFlag,
                 controller: _controller,
@@ -237,6 +252,19 @@ class _ConverterUIState extends State<ConverterUI> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22.0),
+              child: Text(
+                "EXPRESSION",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "titillium",
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.end,
+              ),
+            )
           ],
         ),
       ),
@@ -245,9 +273,15 @@ class _ConverterUIState extends State<ConverterUI> {
 
   String toValue() {
     try {
-      return Infix.toValue(_controller.text).toString();
+      if (_controller.text.length == 0) return "";
+      String value = Infix.toValue(_controller.text).toString();
+      if (value.substring(value.length - 2, value.length) == ".0")
+        return value.substring(0, value.length - 2);
+      else {
+        return value;
+      }
     } catch (e) {
-      return "";
+      return "INVALID EXPRESSION";
     }
   }
 
@@ -295,13 +329,13 @@ class _ConverterUIState extends State<ConverterUI> {
 
   double fontsize() {
     int size = _controller.text.length;
-    if (size < 6)
+    if (size < 10)
       return 60;
-    else if (size < 9)
-      return 55;
     else if (size < 12)
+      return 55;
+    else if (size < 14)
       return 50;
-    else if (size < 15)
+    else if (size < 16)
       return 45;
     else if (size < 18)
       return 40;

@@ -19,7 +19,7 @@ class TransparentButton extends StatelessWidget {
         },
         child: Padding(
           // padding: EdgeInsets.all(20),
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8.5),
           child: Text(
             letter,
             textAlign: TextAlign.center,
