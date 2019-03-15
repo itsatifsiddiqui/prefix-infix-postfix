@@ -5,6 +5,7 @@ import 'package:infix_postfix_prefix/widgets/bracket_button.dart';
 import 'package:infix_postfix_prefix/widgets/circular_button.dart';
 import 'package:infix_postfix_prefix/widgets/delete_button.dart';
 import 'package:infix_postfix_prefix/widgets/transparent_button.dart';
+import 'dart:math' as math;
 
 class ConverterUI extends StatefulWidget {
   @override
@@ -43,13 +44,27 @@ class _ConverterUIState extends State<ConverterUI> {
     final w3 = mq.width / 3;
     final w1_8 = mq.width / 1.8;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: bgColor,
+        elevation: 0,
+        title: Text(
+          "Infinix Converter",
+          style: TextStyle(
+            fontFamily: "titillium",
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       resizeToAvoidBottomPadding: false,
       backgroundColor: bgColor,
-      body: Padding(
+      body: Container(
         padding: EdgeInsets.only(left: 12, bottom: 10, right: 16),
+        height: MediaQuery.of(context).size.height,
         child: ListView(
           reverse: true,
           primary: false,
+          physics: (mq.width < 400) ? null : NeverScrollableScrollPhysics(),
           children: <Widget>[
             FittedBox(
               child: Row(
@@ -333,24 +348,24 @@ class _ConverterUIState extends State<ConverterUI> {
                 textAlign: TextAlign.end,
               ),
             ),
-            Container(
-              height: mq.height / 7,
-              alignment: Alignment.bottomCenter,
-              padding: EdgeInsets.all(25),
-              child: Text(
-                "INFIX CONVERTER",
-                style: TextStyle(
-                  fontFamily: "titillium",
-                  color: Colors.white,
-                  fontSize: 25,
-                  letterSpacing: 2,
-                  fontWeight: FontWeight.w500,
-                  decoration: TextDecoration.underline,
-                  decorationStyle: TextDecorationStyle.double,
-                  decorationColor: Colors.orangeAccent,
-                ),
-              ),
-            )
+            // Container(
+            //   height: mq.height / 7,
+            //   alignment: Alignment.bottomCenter,
+            //   padding: EdgeInsets.all(25),
+            //   child: Text(
+            //     "INFIX CONVERTER",
+            //     style: TextStyle(
+            //       fontFamily: "titillium",
+            //       color: Colors.white,
+            //       fontSize: 25,
+            //       letterSpacing: 2,
+            //       fontWeight: FontWeight.w500,
+            //       decoration: TextDecoration.underline,
+            //       decorationStyle: TextDecorationStyle.double,
+            //       decorationColor: Colors.orangeAccent,
+            //     ),
+            //   ),
+            // )
           ],
         ),
       ),
