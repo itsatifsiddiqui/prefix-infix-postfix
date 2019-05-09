@@ -10,19 +10,26 @@ class CircularButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: () => controller.text = controller.text + letter,
-      child: Text(
-        letter,
-        style: TextStyle(
-          fontSize: 30,
+    final mq = MediaQuery.of(context).size;
+    final largePhone = mq.width > 380;
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: RawMaterialButton(
+        onPressed: () => controller.text = controller.text + letter,
+        child: Text(
+          letter,
+          style: TextStyle(
+            fontSize: 17,
+          ),
         ),
+        shape: CircleBorder(),
+        elevation: 2.0,
+        splashColor: Colors.black,
+        fillColor: Colors.deepPurple[50],
+        padding: largePhone
+            ? const EdgeInsets.all(15.0)
+            : const EdgeInsets.all(10.0),
       ),
-      shape: new CircleBorder(),
-      elevation: 2.0,
-      splashColor: Colors.black ,
-      fillColor: Colors.deepPurple[50],
-      padding: const EdgeInsets.all(18.0),
     );
   }
 }

@@ -6,6 +6,8 @@ class DeleteButton extends StatelessWidget {
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context).size;
+    final largePhone = mq.width > 380;
     return GestureDetector(
       onLongPress: () => controller.text = "",
       child: InkWell(
@@ -14,7 +16,6 @@ class DeleteButton extends StatelessWidget {
         onTap: () => controller.text =
             controller.text.substring(0, controller.text.length - 1),
         child: Padding(
-          // padding: EdgeInsets.all(20),
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
           child: Text(
             "DEL",
@@ -23,7 +24,7 @@ class DeleteButton extends StatelessWidget {
               color: Colors.white,
               fontFamily: "titillium",
               fontWeight: FontWeight.bold,
-              fontSize: 25,
+              fontSize: largePhone ? 20 : 12,
             ),
           ),
         ),

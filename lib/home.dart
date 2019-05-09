@@ -7,6 +7,8 @@ import 'package:infix_postfix_prefix/ui_styles/styles.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("jello");
+    print([...[1,2,3],...[2,3,4],...[5,6,7]]);
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: Stack(

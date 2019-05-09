@@ -10,20 +10,37 @@ class BracketButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
-      borderSide: BorderSide(color: Color.fromRGBO(97, 103, 107, 1)),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+    final mq = MediaQuery.of(context).size;
+    final largePhone = mq.width > 380;
+    return Expanded(
+      child: Padding(
+        padding: largePhone
+            ? const EdgeInsets.symmetric(
+                horizontal: 18.0,
+                vertical: 4
+              )
+            : const EdgeInsets.symmetric(
+                horizontal: 18.0,
+              ),
+        child: Container(
+          height: largePhone ? 40 : 30,
+          child: OutlineButton(
+            borderSide: BorderSide(color: Color.fromRGBO(97, 103, 107, 1)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            onPressed: () => controller.text += letter,
+            child: Text(
+              letter,
+              style: TextStyle(fontSize: 15),
+            ),
+            highlightColor: Colors.black,
+            highlightedBorderColor: Colors.black,
+            disabledBorderColor: Colors.white,
+            textColor: Colors.cyan,
+          ),
+        ),
       ),
-      onPressed: () => controller.text += letter,
-      child: Text(
-        letter,
-        style: TextStyle(fontSize: 20),
-      ),
-      highlightColor: Colors.black,
-      highlightedBorderColor: Colors.black,
-      disabledBorderColor: Colors.white,
-      textColor: Colors.cyan,
     );
   }
 }
