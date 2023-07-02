@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-LinearGradient lGradient({@required List<Color> colors}) => LinearGradient(
+LinearGradient lGradient({required List<Color> colors}) => LinearGradient(
     colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight);
 
 final textHeader = TextStyle(

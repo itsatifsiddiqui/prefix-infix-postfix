@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CircularButton extends StatelessWidget {
   const CircularButton(
-      {Key key, @required this.letter, @required this.controller})
+      {Key? key, required this.letter, required this.controller})
       : super(key: key);
 
   final String letter;

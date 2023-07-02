@@ -6,9 +6,9 @@ class RowEndText extends StatelessWidget {
   final Color color;
 
   const RowEndText(
-      {Key key,
-      @required this.label,
-      @required this.answer,
+      {Key? key,
+      required this.label,
+      required this.answer,
       this.color = Colors.white})
       : super(key: key);
 

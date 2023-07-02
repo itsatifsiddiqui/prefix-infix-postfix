@@ -5,9 +5,9 @@ class TransparentButton extends StatelessWidget {
   final TextEditingController controller;
 
   TransparentButton(
-      {Key key,
-      @required this.letter,
-      @required this.controller,})
+      {Key? key,
+      required this.letter,
+      required this.controller,})
       : super(key: key);
 
   @override

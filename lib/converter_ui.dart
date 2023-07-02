@@ -6,7 +6,6 @@ import 'package:infix_postfix_prefix/widgets/circular_button.dart';
 import 'package:infix_postfix_prefix/widgets/delete_button.dart';
 import 'package:infix_postfix_prefix/widgets/row_end_text.dart';
 import 'package:infix_postfix_prefix/widgets/transparent_button.dart';
-import 'dart:math' as math;
 
 class ConverterUI extends StatefulWidget {
   @override
@@ -62,8 +61,7 @@ class _ConverterUIState extends State<ConverterUI> {
           focusNode: node,
           textDirection: TextDirection.ltr,
           textAlign: TextAlign.end,
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.zero, border: InputBorder.none),
+          decoration: InputDecoration(contentPadding: EdgeInsets.zero, border: InputBorder.none),
           style: TextStyle(
             fontSize: fontsize(),
             color: Colors.white,
@@ -116,10 +114,10 @@ class _ConverterUIState extends State<ConverterUI> {
                     ),
                   ))),
       body: SafeArea(
-        child: ListView(
-          physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            if (largePhone) expressionTag,
+            // if (largePhone) expressionTag,
             textInput,
             redLine,
             RowEndText(label: "Prefix", answer: toValue()),
@@ -127,22 +125,19 @@ class _ConverterUIState extends State<ConverterUI> {
             RowEndText(label: "Value", answer: toValue(), color: Colors.green),
             Row(
               children: <Widget>[
-                for (var item in ["(", ")"])
-                  BracketButton(letter: item, controller: _controller)
+                for (var item in ["(", ")"]) BracketButton(letter: item, controller: _controller)
               ],
             ),
             Row(
               children: <Widget>[
                 for (var item in ["7", "8", "9"])
                   Expanded(
-                    child: TransparentButton(
-                        letter: item, controller: _controller),
+                    child: TransparentButton(letter: item, controller: _controller),
                   ),
                 ...[
                   for (var item in ['^', '%'])
                     Expanded(
-                      child:
-                          CircularButton(letter: item, controller: _controller),
+                      child: CircularButton(letter: item, controller: _controller),
                     )
                 ],
               ],
@@ -151,14 +146,12 @@ class _ConverterUIState extends State<ConverterUI> {
               children: <Widget>[
                 for (var item in ["4", "5", "6"])
                   Expanded(
-                    child: TransparentButton(
-                        letter: item, controller: _controller),
+                    child: TransparentButton(letter: item, controller: _controller),
                   ),
                 ...[
                   for (var item in ['\u{00D7}', '\u{00F7}'])
                     Expanded(
-                      child:
-                          CircularButton(letter: item, controller: _controller),
+                      child: CircularButton(letter: item, controller: _controller),
                     )
                 ],
               ],
@@ -167,14 +160,12 @@ class _ConverterUIState extends State<ConverterUI> {
               children: <Widget>[
                 for (var item in ["1", "2", "3"])
                   Expanded(
-                    child: TransparentButton(
-                        letter: item, controller: _controller),
+                    child: TransparentButton(letter: item, controller: _controller),
                   ),
                 ...[
                   for (var item in ["+", "-"])
                     Expanded(
-                      child:
-                          CircularButton(letter: item, controller: _controller),
+                      child: CircularButton(letter: item, controller: _controller),
                     )
                 ],
               ],
@@ -222,12 +213,13 @@ class _ConverterUIState extends State<ConverterUI> {
       flex: 4,
       child: Padding(
         padding: const EdgeInsets.only(right: 12.0, left: 2),
-        child: FlatButton(
-          padding: largePhone ? EdgeInsets.all(8) : EdgeInsets.zero,
-          splashColor: Colors.black,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
-          color: Colors.deepOrangeAccent[100],
+        child: TextButton(
+          style: TextButton.styleFrom(
+            padding: largePhone ? EdgeInsets.all(8) : EdgeInsets.zero,
+            // splashColor: Colors.black,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1000)),
+            backgroundColor: Colors.deepOrangeAccent[100],
+          ),
           onPressed: () {
             setState(() {
               _keyboardFlag = !_keyboardFlag;

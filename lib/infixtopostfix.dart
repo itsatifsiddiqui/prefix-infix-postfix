@@ -132,7 +132,7 @@ class Infix {
       case '%':
         return a % b;
       case '^':
-        return pow(a, b);
+        return pow(a, b) as double;
       case '/':
         if (b == 0) throw new Exception("Cannot divide by zero");
         return a / b;

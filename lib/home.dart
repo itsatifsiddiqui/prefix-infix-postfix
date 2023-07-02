@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/material.dart';
 import 'package:infix_postfix_prefix/converter_ui.dart';
 import 'package:infix_postfix_prefix/ui_styles/styles.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("jello");
-    print([...[1,2,3],...[2,3,4],...[5,6,7]]);
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
       body: Stack(
@@ -60,7 +57,7 @@ class Home extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Colors.redAccent[100], Colors.deepOrangeAccent[100]],
+                  colors: [Colors.redAccent[100]!, Colors.deepOrangeAccent[100]!],
                 ),
               ),
               child: Column(
@@ -95,12 +92,10 @@ class Home extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(12),
         child: InkWell(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (_) => ConverterUI())),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ConverterUI())),
           child: Card(
             elevation: 4,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             child: Container(
                 height: MediaQuery.of(context).size.height / 5,
                 width: MediaQuery.of(context).size.width,
@@ -109,10 +104,7 @@ class Home extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [
-                      Colors.purpleAccent[100],
-                      Colors.deepPurpleAccent[100]
-                    ],
+                    colors: [Colors.purpleAccent[100]!, Colors.deepPurpleAccent[100]!],
                   ),
                 ),
                 child: Column(
@@ -124,8 +116,7 @@ class Home extends StatelessWidget {
                       style: textHeader,
                     ),
                     SizedBox(height: 10),
-                    Text("A+B -> AB+ ",
-                        textAlign: TextAlign.center, style: textMedium),
+                    Text("A+B -> AB+ ", textAlign: TextAlign.center, style: textMedium),
                     Text(
                       "A+B -> +AB ",
                       textAlign: TextAlign.center,
@@ -153,7 +144,7 @@ class Home extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               gradient: lGradient(
-                colors: [Colors.blueAccent[100], Colors.lightBlueAccent[100]],
+                colors: [Colors.blueAccent[100]!, Colors.lightBlueAccent[100]!],
               ),
             ),
             child: Column(
@@ -188,8 +179,7 @@ class Home extends StatelessWidget {
       clipper: MyClipper(),
       child: Container(
         decoration: BoxDecoration(
-            gradient: lGradient(
-                colors: [Colors.green[300], Colors.greenAccent[700]])),
+            gradient: lGradient(colors: [Colors.green[300]!, Colors.greenAccent[700]!])),
         height: MediaQuery.of(context).size.height / 2.2,
       ),
     );
